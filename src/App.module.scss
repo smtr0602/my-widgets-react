@@ -1,0 +1,35 @@
+@use './styles/utilities/variables' as *;
+@use './styles/utilities/mixins' as *;
+
+.App {
+  align-items: center;
+  background: no-repeat center center/cover;
+  display: flex;
+  height: 100vh;
+  position: relative;
+  width: 100%;
+  z-index: -2;
+  &::before {
+    background: rgba(255, 255, 255, 0.2);
+    content: '';
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: -1;
+  }
+}
+.mainContainer {
+  height: 96%;
+  margin: 0 auto;
+  max-width: $max-width;
+  overflow-y: scroll;
+  padding: 0 4% 20px;
+  position: fixed;
+  left: 0;
+  width: 100%;
+  @include for-md-screen-up {
+    padding-bottom: 40px;
+  }
+}
