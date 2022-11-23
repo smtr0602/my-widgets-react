@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { getTimeOfDayText } from './helpers';
 import fetchAllWidgetsData from './services';
 import GreetingWidget from './components/widgets/greeting';
+import CurrencyRateWidget from './components/widgets/currency-rate';
 import './styles/index.scss';
 import styles from './App.module.scss';
 
@@ -30,10 +31,15 @@ function App() {
           }}
         >
           <div className={styles.mainContainer}>
-            <GreetingWidget
-              widgetData={widgetsData.quote}
-              timeOfDayText={timeOfDayText}
-            />
+            <div className={styles.inlineWidgetsWrap}>
+              <GreetingWidget
+                widgetData={widgetsData.quote}
+                timeOfDayText={timeOfDayText}
+              />
+              <div className={styles.smWidgetsWrap}>
+                <CurrencyRateWidget widgetData={widgetsData.currencyRate} />
+              </div>
+            </div>
           </div>
         </div>
       ) : (

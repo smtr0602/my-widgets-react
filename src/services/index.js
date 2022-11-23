@@ -13,6 +13,19 @@ const widgets = [
       timeout: import.meta.env.VITE_AXIOS_TIMEOUT,
     },
   },
+  {
+    name: 'currencyRate',
+    options: {
+      method: 'GET',
+      url: import.meta.env.VITE_EXCHANGE_RATES_API_URL,
+      // vancouver location
+      params: { to: 'JPY', from: 'CAD', amount: 1 },
+      headers: {
+        apikey: import.meta.env.VITE_EXCHANGE_RATES_API_KEY,
+      },
+      timeout: import.meta.env.VITE_AXIOS_TIMEOUT,
+    },
+  },
 ];
 
 /**

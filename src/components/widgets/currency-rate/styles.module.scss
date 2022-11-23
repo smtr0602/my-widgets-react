@@ -1,0 +1,21 @@
+@use '../../../styles/utilities/mixins' as *;
+@use '../../../styles/utilities/variables' as *;
+
+.currencyRateWidget {
+  display: inline-block;
+  .currencyFrom {
+    font-size: 1.4rem;
+  }
+  .currencyTo {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-top: 1rem;
+  }
+  .currencyTime {
+    font-size: 1rem;
+    margin-top: 2rem;
+  }
+  .currencyDecimal {
+    color: $grey-dark;
+  }
+}

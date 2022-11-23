@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styles from './styles.module.scss';
 
 const GreetingWidget = ({ widgetData, timeOfDayText }) => {
@@ -8,7 +8,6 @@ const GreetingWidget = ({ widgetData, timeOfDayText }) => {
     evening: 'afternoon',
     night: 'evening',
   };
-  useEffect(() => {});
 
   return (
     <div
