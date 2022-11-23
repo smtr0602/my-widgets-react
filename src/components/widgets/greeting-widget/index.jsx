@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { fetchSingleWidgetData } from '../../../services';
-import styles from './styles.module.scss';
+import WidgetWrapper from '../widget-wrapper';
 
 const GreetingWidget = ({ setDataStatuses, timeOfDayText }) => {
   const [widgetData, setWidgetData] = useState(null);
@@ -27,21 +27,21 @@ const GreetingWidget = ({ setDataStatuses, timeOfDayText }) => {
   }, []);
 
   return (
-    <>
-      {widgetData && (
-        <div
-          className={`${styles.greetingWidget} ${
-            timeOfDayText === 'night' && styles.night
-          }`}
-        >
+    <WidgetWrapper
+      name="greeting"
+      widgetData={widgetData}
+      className={timeOfDayText === 'night' && styles.night}
+    >
+      {(data, styles) => (
+        <>
           <h1>
             Good {greetingText[timeOfDayText]},
             <span>{import.meta.env.VITE_USER_NAME}!</span>
           </h1>
-          <p className={styles.quote}>{widgetData}</p>
-        </div>
+          <p className={styles.quote}>{data}</p>
+        </>
       )}
-    </>
+    </WidgetWrapper>
   );
 };
 

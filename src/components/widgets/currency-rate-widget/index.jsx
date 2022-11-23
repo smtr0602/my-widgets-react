@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { format } from 'date-fns';
 import { fetchSingleWidgetData } from '../../../services';
-import widgetStyles from '../styles.module.scss';
-import styles from './styles.module.scss';
+import WidgetWrapper from '../widget-wrapper';
 
 const CurrencyRateWidget = ({ setDataStatuses }) => {
   const [widgetData, setWidgetData] = useState(null);
@@ -27,28 +26,23 @@ const CurrencyRateWidget = ({ setDataStatuses }) => {
   }, []);
 
   return (
-    <>
-      {widgetData && (
-        <div
-          className={`${styles.currencyRateWidget} ${widgetStyles.widgetItem}`}
-        >
+    <WidgetWrapper name="currencyRate" widgetData={widgetData}>
+      {(data, styles) => (
+        <>
           <p className={styles.currencyFrom}>
-            {Number(widgetData.query.amount).toFixed(2)} Canadian Dollar =
+            {Number(data.query.amount).toFixed(2)} Canadian Dollar =
           </p>
           <p className={styles.currencyTo}>
             {fromValInt}
-            <span className={styles.currencyDecimal}>
-              .{fromValDecimal}
-            </span>{' '}
+            <span className={styles.currencyDecimal}>.{fromValDecimal}</span>
             Japanese Yen
           </p>
           <p className={styles.currencyTime}>
-            Updated at:{' '}
-            {format(widgetData.info.timestamp * 1000, 'MM/dd HH:mm')}
+            Updated at: {format(data.info.timestamp * 1000, 'MM/dd HH:mm')}
           </p>
-        </div>
+        </>
       )}
-    </>
+    </WidgetWrapper>
   );
 };
 
