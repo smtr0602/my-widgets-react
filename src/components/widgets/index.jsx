@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { getTimeOfDayText } from '../../helpers';
-import GreetingWidget from './greeting';
-import CurrencyRateWidget from './currency-rate';
+import GreetingWidget from './greeting-widget';
+import CurrencyRateWidget from './currency-rate-widget';
 import styles from './styles.module.scss';
 
 const Widgets = ({ widgetsData }) => {
