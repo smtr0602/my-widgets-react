@@ -5,6 +5,35 @@
   display: flex;
   flex-direction: column;
 }
+.inlineWidgetsWrap {
+  display: flex;
+  margin-top: $layout-gap;
+  @include for-sm-screen {
+    flex-direction: column;
+  }
+  @include for-md-screen-up {
+    align-items: center;
+    order: 2;
+  }
+  .widget-item {
+    @include for-md-screen-up {
+      margin-top: 0;
+    }
+  }
+}
+.smWidgetsWrap {
+  @include for-sm-screen {
+    width: 100%;
+  }
+  @include for-md-screen-up {
+    margin-left: 8%;
+  }
+  .widgetItem {
+    @include for-sm-screen {
+      width: 100%;
+    }
+  }
+}
 .widgetItem {
   background-color: $white-primary;
   border-radius: 15px;

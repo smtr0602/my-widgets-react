@@ -1,23 +1,21 @@
 import { useEffect, useMemo, useState } from 'react';
 import { getTimeOfDayText } from './helpers';
 import fetchAllWidgetsData from './services';
-import GreetingWidget from './components/widgets/greeting';
-import CurrencyRateWidget from './components/widgets/currency-rate';
+import Widgets from './components/widgets';
 import './styles/index.scss';
 import styles from './App.module.scss';
 
 function App() {
-  const [widgetsData, setWidgetsData] = useState(null);
   const timeOfDayText = useMemo(() => getTimeOfDayText(), []);
+  const [widgetsData, setWidgetsData] = useState(null);
   useEffect(() => {
-    const newData = {};
-    fetchAllWidgetsData().then((data) => {
-      console.log(data);
-      data.forEach((widgetData) => {
+    const newWidgetsData = {};
+    fetchAllWidgetsData().then((dataArr) => {
+      dataArr.forEach((widgetData) => {
         const { value } = widgetData;
-        newData[value.name] = value.data;
+        newWidgetsData[value.name] = value.data;
       });
-      setWidgetsData(newData);
+      setWidgetsData(newWidgetsData);
     });
   }, []);
 
@@ -31,15 +29,7 @@ function App() {
           }}
         >
           <div className={styles.mainContainer}>
-            <div className={styles.inlineWidgetsWrap}>
-              <GreetingWidget
-                widgetData={widgetsData.quote}
-                timeOfDayText={timeOfDayText}
-              />
-              <div className={styles.smWidgetsWrap}>
-                <CurrencyRateWidget widgetData={widgetsData.currencyRate} />
-              </div>
-            </div>
+            <Widgets widgetsData={widgetsData} />
           </div>
         </div>
       ) : (
