@@ -1,12 +1,14 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { getTimeOfDayText } from '../../helpers';
+import WeatherWidget from './weather-widget';
 import GreetingWidget from './greeting-widget';
 import CurrencyRateWidget from './currency-rate-widget';
 import styles from './styles.module.scss';
 
 const Widgets = ({ setIsReady }) => {
   const [dataStatuses, setDataStatuses] = useState({
-const Widgets = ({ widgetsData }) => {
+    weather: false,
+    greeting: false,
     currencyRate: false,
   });
   const timeOfDayText = useMemo(() => getTimeOfDayText(), []);
@@ -19,7 +21,8 @@ const Widgets = ({ widgetsData }) => {
 
   return (
     <>
-    <div className={styles.inlineWidgetsWrap}>
+      <WeatherWidget setDataStatuses={setDataStatuses} />
+      <div className={styles.inlineWidgetsWrap}>
         <GreetingWidget
           timeOfDayText={timeOfDayText}
           setDataStatuses={setDataStatuses}

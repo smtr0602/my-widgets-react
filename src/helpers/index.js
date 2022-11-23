@@ -10,3 +10,18 @@ export const getTimeOfDayText = () => {
     return 'night';
   }
 };
+
+export const getCurrentLocation = async () => {
+  return new Promise((resolve, reject) => {
+    try {
+      navigator.geolocation.getCurrentPosition((data) => {
+        const {
+          coords: { latitude, longitude },
+        } = data;
+        resolve({ latitude, longitude });
+      });
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
