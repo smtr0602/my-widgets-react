@@ -1,0 +1,61 @@
+@use '../../../styles/utilities/mixins' as *;
+@use '../../../styles/utilities/variables' as *;
+
+.newsWidget {
+  ul {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  }
+  li {
+    border: 1px solid $grey;
+    border-radius: 5px;
+    position: relative;
+    img {
+      border-radius: 5px;
+      object-fit: cover;
+      height: 150px;
+      @include for-md-screen-up {
+        height: 125px;
+      }
+    }
+  }
+  .newsInner {
+    height: 600px;
+    overflow-y: scroll;
+  }
+  .newsContent {
+    height: 180px;
+    overflow-y: scroll;
+    padding: 1rem;
+    .newsLinkBg {
+      background-color: $white-primary;
+      border-radius: 3px;
+      padding: 3px;
+      position: absolute;
+      right: 5px;
+      top: 5px;
+      svg {
+        color: $black-primary;
+        font-size: 1.4rem;
+      }
+    }
+    h2 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      line-height: 1.4;
+      a {
+        color: inherit;
+        font-size: inherit;
+        &:hover {
+          opacity: 0.8;
+        }
+      }
+    }
+    p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      margin-top: 1rem;
+    }
+  }
+}

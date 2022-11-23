@@ -17,7 +17,7 @@ const WeatherWidget = ({ setDataStatuses }) => {
     // vancouver location
     const defaultLocation = {
       lat: import.meta.env.VITE_DEFAULT_LATITUDE,
-      lon: import.meta.env.VITE_DEFAULT_LONGITUDE
+      lon: import.meta.env.VITE_DEFAULT_LONGITUDE,
     };
     const axiosOptions = {
       method: 'GET',
@@ -56,7 +56,7 @@ const WeatherWidget = ({ setDataStatuses }) => {
       {widgetData && (
         <div className={`${styles.weatherWidget} ${widgetStyles.widgetItem}`}>
           <p className={styles.weatherLocation}>
-            Weather in: ${widgetData.city_name} (timezone: $
+            Weather in: {widgetData.city_name} (timezone:
             {widgetData.timezone})
           </p>
           <ul>

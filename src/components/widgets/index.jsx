@@ -3,6 +3,7 @@ import { getTimeOfDayText } from '../../helpers';
 import WeatherWidget from './weather-widget';
 import GreetingWidget from './greeting-widget';
 import CurrencyRateWidget from './currency-rate-widget';
+import NewsWidget from './news-widget';
 import styles from './styles.module.scss';
 
 const Widgets = ({ setIsReady }) => {
@@ -10,6 +11,7 @@ const Widgets = ({ setIsReady }) => {
     weather: false,
     greeting: false,
     currencyRate: false,
+    news: false,
   });
   const timeOfDayText = useMemo(() => getTimeOfDayText(), []);
 
@@ -21,16 +23,19 @@ const Widgets = ({ setIsReady }) => {
 
   return (
     <>
-      <WeatherWidget setDataStatuses={setDataStatuses} />
-      <div className={styles.inlineWidgetsWrap}>
-        <GreetingWidget
-          timeOfDayText={timeOfDayText}
-          setDataStatuses={setDataStatuses}
-        />
-        <div className={styles.smWidgetsWrap}>
-          <CurrencyRateWidget setDataStatuses={setDataStatuses} />
+      <div className={styles.orderWrap}>
+        <div className={styles.inlineWidgetsWrap}>
+          <GreetingWidget
+            timeOfDayText={timeOfDayText}
+            setDataStatuses={setDataStatuses}
+          />
+          <div className={styles.smWidgetsWrap}>
+            <CurrencyRateWidget setDataStatuses={setDataStatuses} />
+          </div>
         </div>
+        <WeatherWidget setDataStatuses={setDataStatuses} />
       </div>
+      <NewsWidget setDataStatuses={setDataStatuses} />
     </>
   );
 };
