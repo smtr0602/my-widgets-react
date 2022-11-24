@@ -34,22 +34,6 @@
     }
   }
 }
-.widgetItem {
-  background-color: $white-primary;
-  border-radius: 15px;
-  box-shadow: 10px 10px 5px 0px rgb(0 0 0 / 35%);
-  margin-top: $layout-gap-lg;
-  padding: 1rem 1.5rem;
-  position: relative;
-  transition: opacity 200ms ease-out;
-  @include for-md-screen-up {
-    box-shadow: 30px 29px 15px 0px rgb(0 0 0 / 35%);
-    margin-top: $layout-gap;
-  }
-  .isEdit & {
-    animation: shake 800ms linear infinite alternate;
-  }
-}
 .deleteBtn {
   background-color: $red;
   border-radius: 50%;

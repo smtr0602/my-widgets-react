@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { format } from 'date-fns';
+import { WidgetsDataContext } from '../../../contexts/WidgetsContext';
 import { fetchSingleWidgetData } from '../../../services';
 import WidgetWrapper from '../widget-wrapper';
 
-const CurrencyRateWidget = ({ setDataStatuses }) => {
+const CurrencyRateWidget = () => {
+  const { setFetchedStatuses, userSettings } = useContext(WidgetsDataContext);
   const [widgetData, setWidgetData] = useState(null);
   const fromValInt = widgetData?.info.rate.toString().split('.')[0];
   const fromValDecimal = widgetData?.info.rate.toString().split('.')[1];
@@ -21,12 +23,16 @@ const CurrencyRateWidget = ({ setDataStatuses }) => {
   useEffect(() => {
     fetchSingleWidgetData(axiosOptions).then((data) => {
       setWidgetData(data);
-      setDataStatuses((prev) => ({ ...prev, currencyRate: true }));
+      setFetchedStatuses((prev) => ({ ...prev, currencyRate: true }));
     });
   }, []);
 
   return (
-    <WidgetWrapper name="currencyRate" widgetData={widgetData}>
+    <WidgetWrapper
+      name="currencyRate"
+      widgetData={widgetData}
+      isEnabled={userSettings.currencyRate}
+    >
       {(data, styles) => (
         <>
           <p className={styles.currencyFrom}>

@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { format } from 'date-fns';
+import { WidgetsDataContext } from '../../../contexts/WidgetsContext';
 import { fetchSingleWidgetData } from '../../../services';
 import { getCurrentLocation } from '../../../helpers';
-import widgetStyles from '../styles.module.scss';
-import styles from './styles.module.scss';
+import WidgetWrapper from '../widget-wrapper';
 
-const WeatherWidget = ({ setDataStatuses }) => {
+const WeatherWidget = () => {
+  const { setFetchedStatuses, userSettings } = useContext(WidgetsDataContext);
   const [widgetData, setWidgetData] = useState(null);
 
   useEffect(() => {
@@ -34,7 +35,7 @@ const WeatherWidget = ({ setDataStatuses }) => {
     };
     fetchSingleWidgetData(axiosOptions).then((data) => {
       setWidgetData(data);
-      setDataStatuses((prev) => ({ ...prev, weather: true }));
+      setFetchedStatuses((prev) => ({ ...prev, weather: true }));
     });
   }, []);
 
@@ -52,12 +53,16 @@ const WeatherWidget = ({ setDataStatuses }) => {
   };
 
   return (
-    <>
-      {widgetData && (
-        <div className={`${styles.weatherWidget} ${widgetStyles.widgetItem}`}>
+    <WidgetWrapper
+      name="weather"
+      widgetData={widgetData}
+      isEnabled={userSettings.weather}
+    >
+      {(data, styles) => (
+        <>
           <p className={styles.weatherLocation}>
-            Weather in: {widgetData.city_name} (timezone:
-            {widgetData.timezone})
+            Weather in: {data.city_name} (timezone:
+            {data.timezone})
           </p>
           <ul>
             {todaysList().length &&
@@ -85,9 +90,9 @@ const WeatherWidget = ({ setDataStatuses }) => {
                 </li>
               ))}
           </ul>
-        </div>
+        </>
       )}
-    </>
+    </WidgetWrapper>
   );
 };
 

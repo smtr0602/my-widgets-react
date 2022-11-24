@@ -1,9 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { WidgetsDataContext } from '../../../contexts/WidgetsContext';
 import camelToKebabCase from '../../../utils/camelToKebabCase';
 import styles from './styles.module.scss';
-import WidgetShownToggler from '../widget-shown-toggler';
+import EnableToggler from '../enable-toggler';
 
-const WidgetWrapper = ({ name, widgetData, className, children }) => {
+const WidgetWrapper = ({
+  name,
+  widgetData,
+  className,
+  isEnabled,
+  children,
+}) => {
+  const { setUserSettings, isEditMode } = useContext(WidgetsDataContext);
   const [widgetStyles, setWidgetStyles] = useState(null);
 
   useEffect(() => {
@@ -17,16 +25,34 @@ const WidgetWrapper = ({ name, widgetData, className, children }) => {
     setWidgetStyles(theme);
   };
 
+  const handleChange = (status) => {
+    setUserSettings((prev) => ({ ...prev, [name]: status }));
+  };
+
+  const isShown = () => {
+    if (isEditMode) return true;
+    return widgetData && isEnabled && widgetStyles;
+  };
+
   return (
     <>
-      {widgetData && widgetStyles && (
+      {isShown() && (
         <div
           className={`${styles.widgetItem} ${widgetStyles[`${name}Widget`]} ${
             className ? className : ''
+          } ${isEnabled ? styles.isEnabled : ''} ${
+            isEditMode ? styles.isEditMode : ''
           }`}
         >
           {children(widgetData, widgetStyles)}
-          <WidgetShownToggler className={styles.toggler} />
+          {isEditMode && (
+            <EnableToggler
+              isEnabled={isEnabled}
+              className={styles.toggler}
+              handleChange={handleChange}
+              setUserSettings={setUserSettings}
+            />
+          )}
         </div>
       )}
     </>

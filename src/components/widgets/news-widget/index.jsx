@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
+import { WidgetsDataContext } from '../../../contexts/WidgetsContext';
 import { fetchSingleWidgetData } from '../../../services';
 import WidgetWrapper from '../widget-wrapper';
 
-const NewsWidget = ({ setDataStatuses }) => {
+const NewsWidget = () => {
+  const { setFetchedStatuses, userSettings } = useContext(WidgetsDataContext);
   const [widgetData, setWidgetData] = useState(null);
 
   useEffect(() => {
@@ -20,12 +22,16 @@ const NewsWidget = ({ setDataStatuses }) => {
     };
     fetchSingleWidgetData(axiosOptions).then(({ articles }) => {
       setWidgetData(articles);
-      setDataStatuses((prev) => ({ ...prev, news: true }));
+      setFetchedStatuses((prev) => ({ ...prev, news: true }));
     });
   }, []);
 
   return (
-    <WidgetWrapper name="news" widgetData={widgetData}>
+    <WidgetWrapper
+      name="news"
+      widgetData={widgetData}
+      isEnabled={userSettings.news}
+    >
       {(data, styles) => (
         <div className={styles.newsInner}>
           <ul>

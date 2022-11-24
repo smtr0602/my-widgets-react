@@ -1,2 +1,38 @@
 @use '../../../styles/utilities/mixins' as *;
 @use '../../../styles/utilities/variables' as *;
+
+.widgetItem {
+  background-color: $white-primary;
+  border-radius: 15px;
+  box-shadow: 10px 10px 5px 0px rgb(0 0 0 / 35%);
+  margin-top: $layout-gap-lg;
+  opacity: 0.5;
+  padding: 1rem 1.5rem;
+  position: relative;
+  transition: opacity 200ms ease-out;
+  @include for-md-screen-up {
+    box-shadow: 30px 29px 15px 0px rgb(0 0 0 / 35%);
+    margin-top: $layout-gap;
+  }
+  &.isEditMode {
+    animation: shake 800ms linear infinite alternate;
+  }
+  &.isEnabled {
+    opacity: 1;
+  }
+}
+.toggler {
+  position: absolute;
+  top: 0;
+  right: 0;
+  translate: 0 -20px;
+}
+
+@keyframes shake {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-1.5deg);
+  }
+}

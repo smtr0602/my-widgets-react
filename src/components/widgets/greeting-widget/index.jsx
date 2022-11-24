@@ -1,8 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { WidgetsDataContext } from '../../../contexts/WidgetsContext';
 import { fetchSingleWidgetData } from '../../../services';
 import WidgetWrapper from '../widget-wrapper';
+import greetingStyles from './styles.module.scss';
 
-const GreetingWidget = ({ setDataStatuses, timeOfDayText }) => {
+const GreetingWidget = ({ timeOfDayText }) => {
+  const { setFetchedStatuses, userSettings } = useContext(WidgetsDataContext);
   const [widgetData, setWidgetData] = useState(null);
   const greetingText = {
     morning: 'morning',
@@ -22,7 +25,7 @@ const GreetingWidget = ({ setDataStatuses, timeOfDayText }) => {
   useEffect(() => {
     fetchSingleWidgetData(axiosOptions).then((data) => {
       setWidgetData(data);
-      setDataStatuses((prev) => ({ ...prev, greeting: true }));
+      setFetchedStatuses((prev) => ({ ...prev, greeting: true }));
     });
   }, []);
 
@@ -30,7 +33,8 @@ const GreetingWidget = ({ setDataStatuses, timeOfDayText }) => {
     <WidgetWrapper
       name="greeting"
       widgetData={widgetData}
-      className={timeOfDayText === 'night' && styles.night}
+      className={timeOfDayText === 'night' && greetingStyles.night}
+      isEnabled={userSettings.greeting}
     >
       {(data, styles) => (
         <>
