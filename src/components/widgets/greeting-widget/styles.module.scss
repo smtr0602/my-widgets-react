@@ -17,6 +17,8 @@
       font-size: 4.5rem;
     }
     span {
+      text-transform: capitalize;
+      word-break: break-all;
       @include for-sm-screen {
         display: block;
       }

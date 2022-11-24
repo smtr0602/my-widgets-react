@@ -19,11 +19,11 @@ const Widgets = () => {
   useEffect(() => {
     const localStorageData = getItem(LOCAL_STORAGE_KEY);
     if (localStorageData) {
-      console.log(localStorageData);
       setUserSettings(localStorageData);
     }
   }, []);
 
+  // update local storage when edit mode is turned off
   const isInitialRender = useRef(true);
   useEffect(() => {
     if (isInitialRender.current) {

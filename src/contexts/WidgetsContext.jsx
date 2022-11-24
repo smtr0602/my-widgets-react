@@ -16,6 +16,7 @@ export const WidgetsDataProvider = ({ children }) => {
   const localStorageData = getItem(LOCAL_STORAGE_KEY);
   const [userSettings, setUserSettings] = useState(
     localStorageData || {
+      username: '',
       weather: true,
       greeting: true,
       currencyRate: true,

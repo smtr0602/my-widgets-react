@@ -40,7 +40,7 @@ const GreetingWidget = ({ timeOfDayText }) => {
         <>
           <h1>
             Good {greetingText[timeOfDayText]},
-            <span>{import.meta.env.VITE_USER_NAME}!</span>
+            <span>{userSettings.username || 'Guest'}!</span>
           </h1>
           <p className={styles.quote}>{data}</p>
         </>

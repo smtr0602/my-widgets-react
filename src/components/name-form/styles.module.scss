@@ -1,0 +1,85 @@
+@use '../../styles/utilities/mixins' as *;
+@use '../../styles/utilities/variables' as *;
+
+.nameForm {
+  background-color: #a8ebff;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.95;
+  z-index: 100;
+}
+.nameFormInner {
+  text-align: center;
+  width: 80%;
+  @include for-sm-screen {
+    max-width: 300px;
+  }
+  h1 {
+    font-size: 2rem;
+    @include for-md-screen-up {
+      font-size: 2.8rem;
+    }
+  }
+  .errorMsg {
+    color: #e80f0f;
+    font-size: 1.4rem;
+    height: 1.4rem;
+    margin-top: 1rem;
+    @include for-md-screen-up {
+      font-size: 1.6rem;
+      margin-top: 2rem;
+    }
+  }
+  form {
+    @include for-sm-screen {
+      margin-top: 1rem;
+    }
+  }
+  input,
+  button {
+    border-radius: 0.5rem;
+    font-size: 1.4rem;
+    padding: 1rem;
+    @include for-sm-screen {
+      display: block;
+    }
+    @include for-md-screen-up {
+      font-size: 1.6rem;
+      padding: 1.2rem;
+    }
+  }
+  input {
+    border: none;
+    @include for-sm-screen {
+      width: 100%;
+    }
+    @include for-md-screen-up {
+      margin-right: 5px;
+      width: 250px;
+    }
+  }
+  button {
+    background-color: $black-primary;
+    border: none;
+    color: $white-primary;
+    cursor: pointer;
+    font-family: inherit;
+    margin-top: 1rem;
+    transition: scale 200ms ease-in-out;
+    &:hover {
+      scale: 1.05;
+    }
+    @include for-sm-screen {
+      width: 100%;
+    }
+    @include for-md-screen-up {
+      width: 100px;
+    }
+  }
+}

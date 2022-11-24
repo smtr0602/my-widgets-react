@@ -1,12 +1,13 @@
 import { useMemo, useState, useContext, useEffect } from 'react';
 import { WidgetsDataContext } from './contexts/WidgetsContext';
 import { getTimeOfDayText } from './helpers';
+import NameForm from './components/name-form';
 import Widgets from './components/widgets';
 import './styles/index.scss';
 import styles from './App.module.scss';
 
 function App() {
-  const { fetchedStatuses } = useContext(WidgetsDataContext);
+  const { userSettings, fetchedStatuses } = useContext(WidgetsDataContext);
   const timeOfDayText = useMemo(() => getTimeOfDayText(), []);
   const [isReady, setIsReady] = useState(false);
 
@@ -18,7 +19,9 @@ function App() {
 
   return (
     <>
+      {/* Not using ternary operator as the flag relies on data in each widget */}
       {!isReady && <p>Loading...</p>}
+      {userSettings.username === '' && <NameForm />}
       <div
         className={styles.App}
         style={{
