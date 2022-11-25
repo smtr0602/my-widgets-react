@@ -5,7 +5,8 @@ import WidgetWrapper from '../widget-wrapper';
 import greetingStyles from './styles.module.scss';
 
 const GreetingWidget = ({ timeOfDayText }) => {
-  const { setFetchedStatuses, userSettings } = useContext(WidgetsDataContext);
+  const { setFetchedStatuses, userSettings, setUserSettings, isEditMode } =
+    useContext(WidgetsDataContext);
   const [widgetData, setWidgetData] = useState(null);
   const greetingText = {
     morning: 'morning',
@@ -29,6 +30,10 @@ const GreetingWidget = ({ timeOfDayText }) => {
     });
   }, []);
 
+  const resetUsername = () => {
+    setUserSettings((prev) => ({ ...prev, username: '' }));
+  };
+
   return (
     <WidgetWrapper
       name="greeting"
@@ -40,7 +45,12 @@ const GreetingWidget = ({ timeOfDayText }) => {
         <>
           <h1>
             Good {greetingText[timeOfDayText]},
-            <span>{userSettings.username || 'Guest'}!</span>
+            <span
+              onClick={resetUsername}
+              className={`${isEditMode ? styles.isEditMode : ''}`}
+            >
+              {userSettings.username || 'Guest'}!
+            </span>
           </h1>
           <p className={styles.quote}>{data}</p>
         </>

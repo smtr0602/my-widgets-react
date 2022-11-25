@@ -6,6 +6,7 @@
   background: rgba(255, 255, 255, 0.4);
   padding: 1rem 1.5rem;
   @include for-md-screen-up {
+    margin-right: 8%;
     width: 50%;
   }
   h1 {
@@ -17,10 +18,16 @@
       font-size: 4.5rem;
     }
     span {
+      pointer-events: none;
       text-transform: capitalize;
       word-break: break-all;
       @include for-sm-screen {
         display: block;
+      }
+      &.isEditMode {
+        background-color: #eb8344;
+        cursor: pointer;
+        pointer-events: all;
       }
     }
   }
