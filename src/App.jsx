@@ -26,7 +26,7 @@ function App() {
       <div
         className={styles.App}
         style={{
-          backgroundImage: `url(../public/imgs/bg/${timeOfDayText}.png`,
+          backgroundImage: `url(/imgs/bg/${timeOfDayText}.png`,
         }}
       >
         <div className={styles.bgOverlay}>
