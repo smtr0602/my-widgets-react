@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { WidgetsDataContext } from '../../../contexts/WidgetsContext';
 import camelToKebabCase from '../../../utils/camelToKebabCase';
 import styles from './styles.module.scss';
@@ -35,9 +36,13 @@ const WidgetWrapper = ({
   };
 
   return (
-    <>
+    <AnimatePresence>
       {isShown() && (
-        <div
+        <motion.div
+          exit={{ opacity: 0 }}
+          transition={{
+            ease: 'easeOut',
+          }}
           className={`${styles.widgetItem} ${widgetStyles[`${name}Widget`]} ${
             className ? className : ''
           } ${isEnabled ? styles.isEnabled : ''} ${
@@ -53,9 +58,9 @@ const WidgetWrapper = ({
               setUserSettings={setUserSettings}
             />
           )}
-        </div>
+        </motion.div>
       )}
-    </>
+    </AnimatePresence>
   );
 };
 
