@@ -22,7 +22,7 @@ function App() {
     <>
       {/* Not using ternary operator as the flag relies on data in each widget */}
       <Loading isShown={!isReady} />
-      {userSettings.username === '' && <NameForm />}
+      <NameForm isShown={userSettings.username === ''} />
       <div
         className={styles.App}
         style={{

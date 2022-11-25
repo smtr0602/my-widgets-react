@@ -22,7 +22,7 @@
       text-transform: capitalize;
       word-break: break-all;
       @include for-sm-screen {
-        display: block;
+        display: inline-block;
       }
       &.isEditMode {
         background-color: #eb8344;
