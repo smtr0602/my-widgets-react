@@ -1,6 +1,7 @@
 import { useMemo, useState, useContext, useEffect } from 'react';
 import { WidgetsDataContext } from './contexts/WidgetsContext';
 import { getTimeOfDayText } from './helpers';
+import Loading from './components/loading';
 import NameForm from './components/name-form';
 import Widgets from './components/widgets';
 import './styles/index.scss';
@@ -20,7 +21,7 @@ function App() {
   return (
     <>
       {/* Not using ternary operator as the flag relies on data in each widget */}
-      {!isReady && <p>Loading...</p>}
+      <Loading isShown={!isReady} />
       {userSettings.username === '' && <NameForm />}
       <div
         className={styles.App}
