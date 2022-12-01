@@ -10,32 +10,29 @@ const WeatherWidget = () => {
   const [widgetData, setWidgetData] = useState(null);
 
   useEffect(() => {
-    const getLocation = async () => {
-      return await getCurrentLocation();
-    };
-    const { latitude, longitude } = getLocation();
-
-    // vancouver location
-    const defaultLocation = {
-      lat: import.meta.env.VITE_DEFAULT_LATITUDE,
-      lon: import.meta.env.VITE_DEFAULT_LONGITUDE,
-    };
-    const axiosOptions = {
-      method: 'GET',
-      url: import.meta.env.VITE_WEATHER_API_URL,
-      params: {
-        lat: latitude || defaultLocation.lat,
-        lon: longitude || defaultLocation.lon,
-      },
-      headers: {
-        'X-RapidAPI-Key': import.meta.env.VITE_RAPID_API_KEY,
-        'X-RapidAPI-Host': 'weatherbit-v1-mashape.p.rapidapi.com',
-      },
-      timeout: import.meta.env.VITE_AXIOS_TIMEOUT,
-    };
-    fetchSingleWidgetData(axiosOptions).then((data) => {
-      setWidgetData(data);
-      setFetchedStatuses((prev) => ({ ...prev, weather: true }));
+    getCurrentLocation().then(({ latitude, longitude }) => {
+      // vancouver location
+      const defaultLocation = {
+        lat: import.meta.env.VITE_DEFAULT_LATITUDE,
+        lon: import.meta.env.VITE_DEFAULT_LONGITUDE,
+      };
+      const axiosOptions = {
+        method: 'GET',
+        url: import.meta.env.VITE_WEATHER_API_URL,
+        params: {
+          lat: latitude || defaultLocation.lat,
+          lon: longitude || defaultLocation.lon,
+        },
+        headers: {
+          'X-RapidAPI-Key': import.meta.env.VITE_RAPID_API_KEY,
+          'X-RapidAPI-Host': 'weatherbit-v1-mashape.p.rapidapi.com',
+        },
+        timeout: import.meta.env.VITE_AXIOS_TIMEOUT,
+      };
+      fetchSingleWidgetData(axiosOptions).then((data) => {
+        setWidgetData(data);
+        setFetchedStatuses((prev) => ({ ...prev, weather: true }));
+      });
     });
   }, []);
 
